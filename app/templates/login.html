@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form class="loginform" method="post">
+        {{loginform.username.label}} {{loginform.username()}}<br>
+<!--        label 这个标签其实就是显示名字 这个标签的名字 然后() 就是相当于使用这个功能-->
+        {{loginform.password.label}} {{loginform.password()}} <br>
+        {{loginform.remember_me()}}{{loginform.remember_me.label}}
+        {{loginform.submit()}}
+    </form>
+{% endblock %}
