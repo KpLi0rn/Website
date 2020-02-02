@@ -13,7 +13,7 @@ def index():
         "author":"kplern",
         "content":"have a good day"
     }]
-    return render_template("index.html",posts=posts)
+    return render_template("index.html",posts=posts,title="Welcome")
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -21,4 +21,4 @@ def login():
     if loginform.validate_on_submit():
         flash("user{},password{}".format(loginform.username.data,loginform.remember_me.data))
         return redirect(url_for("index"))
-    return render_template("login.html",loginform=loginform,title="Login in")
+    return render_template("login.html", title='Login in', loginform=loginform)

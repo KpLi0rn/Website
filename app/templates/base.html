@@ -1,15 +1,19 @@
 <html>
-    <head>
-        <h1>Welcome to my website</h1>
+     <head>
+      <meta charset="UTF-8">
+         <h1>Welcome</h1>
+        {% if title %}
+            <title>{{ title }} - Microblog</title>
+        {% else %}
+            <title>Welcome to Microblog</title>
+        {% endif %}
     </head>
-
     <body>
-
         <hr>
         {% with messages=get_flashed_messages() %}
             {% if messages %}
                  {% for message in messages %}
-                 <li>{{message}}</li>
+                    {{message}}
                  {% endfor %}
             {% endif %}
         {% endwith %}

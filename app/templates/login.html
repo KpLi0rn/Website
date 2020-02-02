@@ -3,7 +3,7 @@
 {% block content %}
     <form class="loginform" method="post">
         {{ loginform.hidden_tag()}}
-        {{loginform.username.label}} {{loginform.username(size=20)}}<br>
+        {{ loginform.username.label}} {{loginform.username(size=20)}}<br>
         {% for error in loginform.username.errors %}
         <span style="color: #9C1A1C">{{error}}</span>
         {% endfor %}

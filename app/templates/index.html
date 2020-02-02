@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
     {% for post in posts %}
-    <h1>{{post.author}} Says {{post.content}}</h1>
+    <div>{{post.author}} Says {{post.content}}</div>
     {% endfor %}
 {% endblock %}
