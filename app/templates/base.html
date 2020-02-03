@@ -2,11 +2,17 @@
      <head>
       <meta charset="UTF-8">
          <h1>Welcome</h1>
-        {% if title %}
+         {% if title %}
             <title>{{ title }} - Microblog</title>
-        {% else %}
+         {% else %}
             <title>Welcome to Microblog</title>
-        {% endif %}
+         {% endif %}
+         <a href="{{url_for('index')}}">Home</a>
+         {% if current_user.is_anonymous %}
+         <a href="{{url_for('login')}}">Login</a>
+         {% else %}
+         <a href="{{url_for('logout')}}">Logout</a>
+         {% endif %}
     </head>
     <body>
         <hr>

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block content %}
+<!--    <a href="{{url_for('login')}}">logout</a>-->
     {% for post in posts %}
     <div>{{post.author}} Says {{post.content}}</div>
     {% endfor %}
