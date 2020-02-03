@@ -32,7 +32,7 @@ def login():
             flash("用户名或密码错误")
             return redirect(url_for('login'))
         # else:
-        login_user(user,remember=loginform.remember_me.data)
+        login_user(user,remember=loginform.remember_me.data)   # 这一步不能忘的 前面那个只是校验 校验成功之后 通过 login_user 进行登陆
         # 通过 request 进行参数的获取  有参数就跳转到参数的位置 没有参数就默认跳转到 index
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != "":
@@ -55,7 +55,7 @@ def register():
         # 这里不是查询数据 这里是 直接把数据写进去
         # user = User.query.filter_by(username=register.username.data,email=register.email.data).first()
         user = User(username=register.username.data,email=register.email.data)
-        user.set_password(register.password.data)  # 这里打错了变成check password了
+        user.set_password(register.password.data)  # 这里打错了变成check password了  这一步不能忘记 因为我们数据库里面保存的是 哈希数值 这里要用函数 生成一下哈希
         db.session.add(user)    # 这里我变成 User了 但是这里是数据库的提交 需要使用db
         db.session.commit()
         flash("恭喜你注册成功")
