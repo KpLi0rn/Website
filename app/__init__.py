@@ -9,5 +9,6 @@ app.config.from_object(Config) # 将配置对象的配置信息转化成app.conf
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 login = LoginManager(app)
+login.login_view = 'login'  # 进行强制跳转的页面
 
 from app import routes,models # 需要导入models 不然就无法进行迁移了

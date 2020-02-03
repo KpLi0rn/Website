@@ -4,6 +4,7 @@ from app import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from app import login
+
 # 进行用户登陆的功能编写的时候 需要用到 flask-login 的 loginManager 并且在 文件中进行注册 给app添加用户登陆的属性 / 对象
 # 将注册后的登陆对象 导入到 models 由于要对密码进行加密 所以先书写 哈希加密 和 哈希密码的校验
 # 还有一个就是 登陆成功之后 需要进行后续的跟踪这个用户的行为

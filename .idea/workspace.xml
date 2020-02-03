@@ -2,30 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d1ebd56-9e7d-40e7-a70d-2290950f1179" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requests.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/PKG-INFO" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/SOURCES.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/dependency_links.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/installed-files.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/not-zip-safe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/requires.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/top_level.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/Flask_Login-0.4.1-py3.7.egg-info/version_info.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/__about__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/_compat.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/login_manager.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/mixins.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/signals.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/flask_login/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/templates/register.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/bin/dotenv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/cli.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/compat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/ipython.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/parser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/py.typed" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/dotenv/version.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/INSTALLER" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/METADATA" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/RECORD" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/WHEEL" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/entry_points.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/venv/lib/python3.7/site-packages/python_dotenv-0.10.5.dist-info/top_level.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/website.py" beforeDir="false" afterPath="$PROJECT_DIR$/website.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,8 +38,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -84,7 +85,7 @@
       <workItem from="1580551287789" duration="126000" />
       <workItem from="1580604427032" duration="5567000" />
       <workItem from="1580624557975" duration="4901000" />
-      <workItem from="1580697643026" duration="7058000" />
+      <workItem from="1580697643026" duration="15141000" />
     </task>
     <servers />
   </component>

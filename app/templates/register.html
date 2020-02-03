@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="" method="post">
+        {{register.hidden_tag() }}
+        {{register.username.label}} {{register.username(size=20)}}<br>
+        {{register.email.label}} {{register.email(size=20)}}<br>
+        {{register.password.label}} {{register.password(size=20)}}<br>
+        {{register.password_repeat.label}} {{register.password_repeat(size=20)}}<br>
+        {{register.submit()}}
+    </form>
+{% endblock %}

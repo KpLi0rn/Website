@@ -3,10 +3,11 @@
       <meta charset="UTF-8">
          <h1>Welcome</h1>
          {% if title %}
-            <title>{{ title }} - Microblog</title>
+            <title>{{ title }} - Website</title>
          {% else %}
-            <title>Welcome to Microblog</title>
+            <title>Welcome to Website</title>
          {% endif %}
+         <a href="{{url_for('register')}}">Register</a>
          <a href="{{url_for('index')}}">Home</a>
          {% if current_user.is_anonymous %}
          <a href="{{url_for('login')}}">Login</a>

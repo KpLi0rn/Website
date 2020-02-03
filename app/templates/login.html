@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form class="loginform" method="post">
+    <form action="" method="post">
         {{ loginform.hidden_tag()}}
         {{ loginform.username.label}} {{loginform.username(size=20)}}<br>
         {% for error in loginform.username.errors %}
