@@ -11,6 +11,10 @@ from app import login
 # 每当已登录的用户导航到新页面时，flask需要进行权限的校验 校验这个这个用户有没有权限进入到这个页面
 # 所以需要从数据库中进行检索 id Flask-Login将从会话中检索用户的ID，然后将该用户实例加载到内存中。
 
+# 目的是进行用户的跟踪 这是一个用户加载的功能
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 # id username password email
 class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基类  UserMixin 这个是基类包含了四种校验属性
     id = db.Column(db.Integer,primary_key=True)
@@ -38,7 +42,3 @@ class Post(db.Model):
     def __repr__(self):
         return "<Post {}>".format(self.content)
 
-# 目的是进行用户的跟踪 这是一个用户加载的功能
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))

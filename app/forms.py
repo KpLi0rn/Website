@@ -16,12 +16,13 @@ class RegisterForm(FlaskForm):
     email = StringField('邮箱',validators=[DataRequired(),Email()])
     submit = SubmitField('立即注册')
 
-    def username_check(self,username):
+    def validate_username(self,username):    # 为什么这个名字会有关系啊 ！！！
+        
         user= User.query.filter_by(username=username.data).first()   # 这是两种查询方式 中的一种 一种是 first 返回列表中的第一个元素  一种是 all
         if user is not None:
             raise ValidationError('用户名已经被注册')  #生成一个错误
 
-    def email_check(self,email):
+    def validate_email(self,email):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('邮箱已被注册')
