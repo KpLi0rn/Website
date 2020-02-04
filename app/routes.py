@@ -63,6 +63,21 @@ def register():
         return redirect(url_for('login'))
     return render_template("register.html",title="Register",register=register)
 
+@app.route('/user/<username>',methods=['GET','POST'])
+@login_required
+def user(username):
+    # 既然是用户的个人页面 那么数据我们肯定要从数据库里面进行搜索
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [{
+        "author": "KpLi0rn",
+        "content": "be happy"
+    },
+        {
+            "author": "kplern",
+            "content": "have a good day"
+        }]
+    return render_template("profile.html",user=user,posts=posts)
+
 
 
 
