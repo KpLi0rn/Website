@@ -92,7 +92,7 @@ def edit_profile():
     form = EditForm()     # form 相当于是登陆框的一些后端代码
     if form.validate_on_submit():
         current_user.username = form.username.data   # form.username.data 意思应该是 框框接受到到数据 然后赋值给当前用户到username 其实就是表单的数据
-        current_user.about_me = form.about_me.data
+        current_user.about_me = form.about_me.data   # 这里在整理思路的时候想错了 这里应该是表单中获取的数值 赋值到 数据库 也就是 current 数据库的数据是不用data的
         db.session.commit()
         flash("编辑成功")
         return redirect(url_for('user',username=current_user.username))   # 进行一个url跳转
