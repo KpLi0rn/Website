@@ -1,8 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi! {{current_user.username}}</h1>
+    <h1>Hi! {{user.username}}</h1>
     {% for post in posts %}
     {{post.author}} says: {{post.content}}
     {% endfor %}
+    <p>
+        {% if user.about_me %}
+        {{ user.about_me}}
+        {% endif %}
+    </p>
+    <p>
+        {% if user.last_seen %}
+        {{ user.last_seen }}
+        {% endif %}
+    </p>
+    <p>
+        {% if current_user == user %}
+        <a href="{{url_for('edit_profile')}}">Edit</a>
+        {% endif %}
+
+    </p>
+
 {% endblock %}

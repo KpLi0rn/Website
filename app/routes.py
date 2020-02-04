@@ -1,9 +1,10 @@
 from app import app,db
 from flask import render_template,redirect,flash,url_for,request
 from werkzeug.urls import url_parse      # url 解析
-from app.forms import LoginForm,RegisterForm
+from app.forms import LoginForm,RegisterForm,EditForm
 from flask_login import current_user,login_user,logout_user,login_required# 登陆框有两种情况 一种是已经登陆了 还有一种是要登陆的
 from app.models import User  # 对登陆的用户进行一个数据库检索和校验
+from datetime import datetime
 @app.route('/')
 @app.route('/index')
 @login_required
@@ -77,6 +78,28 @@ def user(username):
             "content": "have a good day"
         }]
     return render_template("profile.html",user=user,posts=posts)
+
+@app.before_request
+def before_request():   # 将时间 和 表单里面进行一个联系  利用 app.before_request 在试图函数之前进行一个运行
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        # 进行数据的提交
+        db.session.commit()
+
+@app.route('/edit_profile',methods=['GET','POST'])
+@login_required
+def edit_profile():
+    form = EditForm()     # form 相当于是登陆框的一些后端代码
+    if form.validate_on_submit():
+        current_user.username = form.username.data   # form.username.data 意思应该是 框框接受到到数据 然后赋值给当前用户到username 其实就是表单的数据
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash("编辑成功")
+        return redirect(url_for('user',username=current_user.username))   # 进行一个url跳转
+    elif request.method == "GET":     # get的话那很有可能就是初始情况 我们把数据库的数据赋值给表单的数据
+        form.username.data = current_user.username  # 将数据库中的数据移动到表单的数据
+        form.about_me.data = current_user.about_me
+    return render_template("edit_profile.html",form=form)  # 这里是绑定模版 传参数
 
 
 

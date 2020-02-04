@@ -22,6 +22,8 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
     password_hash = db.Column(db.String(length=128))
     email = db.Column(db.String(length=50),index=True,unique=True)
     posts = db.relationship("Post",backref="author",lazy="dynamic")    # backref 有点类似快捷方式
+    about_me = db.Column(db.String(150))
+    last_seen = db.Column(db.DateTime,default=datetime.utcnow)
 
     def __repr__(self):
         return "<User {}>".format(self.username)

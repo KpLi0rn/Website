@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,BooleanField
-from wtforms.validators import DataRequired,EqualTo,Email,ValidationError
+from wtforms import StringField,PasswordField,SubmitField,BooleanField,TextAreaField
+from wtforms.validators import DataRequired,EqualTo,Email,ValidationError,length
 from app.models import User,Post
 
 class LoginForm(FlaskForm):   # 进行框架的导入 都是基于这个框架的
@@ -27,5 +27,10 @@ class RegisterForm(FlaskForm):
         if user is not None:
             raise ValidationError('邮箱已被注册')
 
+# 个人资料的编辑 可以进行user的修改
+class EditForm(FlaskForm):
+    username = StringField("用户名",validators=[DataRequired()])
+    about_me = TextAreaField("简介",validators=[length(10,150)])
+    submit = SubmitField("提交")
 
 
