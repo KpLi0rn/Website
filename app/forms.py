@@ -17,7 +17,7 @@ class RegisterForm(FlaskForm):
     submit = SubmitField('立即注册')
 
     def validate_username(self,username):    #  以validate开头的 wtforms 会把这种函数方法自定义为默认的验证器 并进行调用他们 这就是为什么 为之前名字不对 500 了
-
+        # 括号中的username 也就是表单获取的username 数据
         user= User.query.filter_by(username=username.data).first()   # 这是两种查询方式 中的一种 一种是 first 返回列表中的第一个元素  一种是 all
         if user is not None:
             raise ValidationError('用户名已经被注册')  #生成一个错误
@@ -29,8 +29,23 @@ class RegisterForm(FlaskForm):
 
 # 个人资料的编辑 可以进行user的修改
 class EditForm(FlaskForm):
+    # 用户名修改的时候我们需要进行查看 我们修改后的用户名 有没有重复 但是如果用户不修改的话 那么也应该允许
     username = StringField("用户名",validators=[DataRequired()])
     about_me = TextAreaField("简介",validators=[length(10,150)])
     submit = SubmitField("提交")
+
+    def __init__(self,original_username,*args,**kwargs):  # 构造函数 original_username 代表的是原来的用户名 所以routes.py 里面要进行current_user.username的添加
+        # *args 可以传入一系列的数值 数量不定  **kwargs 可以传入字典 一系列
+        # 这里为什么要进行一步继承 ?
+        # 继承 super(EditForm,self).__init__(*args,**kwargs) 继承父类型的所有参数
+        super(EditForm,self).__init__(*args,**kwargs)  # 这步操作没有看懂?????
+        self.original_username = original_username
+
+    def validate_username(self,username):
+        if username.data != self.original_username:
+            user = User.query.filter_by(username=username.data).first()
+            if user is not None:
+                raise ValidationError("当前用户名已存在")
+
 
 
