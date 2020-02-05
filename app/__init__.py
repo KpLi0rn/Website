@@ -11,4 +11,4 @@ migrate = Migrate(app,db)
 login = LoginManager(app)
 login.login_view = 'login'  # 进行强制跳转的页面
 
-from app import routes,models # 需要导入models 不然就无法进行迁移了
+from app import routes,models,errors # 需要导入models 不然就无法进行迁移了

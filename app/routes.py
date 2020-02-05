@@ -39,7 +39,6 @@ def login():
         if not next_page or url_parse(next_page).netloc != "":
             next_page = url_for('index')
         return redirect(next_page)
-
     return render_template("login.html", title='Login in', loginform=loginform)
 
 @app.route('/logout')
@@ -100,7 +99,6 @@ def edit_profile():
         form.username.data = current_user.username  # 将数据库中的数据移动到表单的数据
         form.about_me.data = current_user.about_me
     return render_template("edit_profile.html",form=form)  # 这里是绑定模版 传参数
-
 
 
 
