@@ -15,6 +15,13 @@ from app import login
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
+# 创建一个 我关注的人 和关注的人 的关联性的表 】
+# 这是自关联的多对多 显示的是 列名是
+# 粉丝  关注的人  通过看别人关注的人有几个是自己来判断自己的粉丝情况
+followers = db.Table('followers',db.Column('follower_id',db.Integer,db.ForeignKey('user.id')),
+                     db.Column('followed_id',db.Integer,db.ForeignKey('user.id')))
+
 # id username password email
 class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基类  UserMixin 这个是基类包含了四种校验属性
     id = db.Column(db.Integer,primary_key=True)
@@ -24,6 +31,11 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
     posts = db.relationship("Post",backref="author",lazy="dynamic")    # backref 有点类似快捷方式
     about_me = db.Column(db.String(150))
     last_seen = db.Column(db.DateTime,default=datetime.utcnow)
+    # 得多思考思考
+    followed = db.relationship('User',secondary=followers,
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
+                               backref=db.backref('followers',lazy='dynamic'),lazy='dynamic')
 
     def __repr__(self):
         return "<User {}>".format(self.username)
@@ -43,4 +55,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return "<Post {}>".format(self.content)
-
