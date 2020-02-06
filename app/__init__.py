@@ -16,6 +16,8 @@ login.login_view = 'login'  # 进行强制跳转的页面
 
 from app import routes,models,errors # 需要导入models 不然就无法进行迁移了
 
+# 如果不是debug模式的话 就进行日志的记录
+# 大致的逻辑是这样的生成一个log文件 然后进行 形式化
 if not app.debug:
     # 如果没有日志文件夹那么就创建一个
     if not os.path.exists('logs'):
