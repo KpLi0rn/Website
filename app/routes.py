@@ -101,5 +101,30 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template("edit_profile.html",form=form)  # 这里是绑定模版 传参数
 
+@app.route('/follow/<username>',methods=['GET','POST'])
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return redirect(url_for('index'))
+    if current_user == user:
+        flash("你不能关注自己!")
+        return redirect(url_for('index'))
+    current_user.follow(user)
+    db.session.commit()
+    flash("关注成功!")
+    return redirect(url_for('user',username=username))
 
-
+@app.route('/unfollow/<username>',methods=['GET','POST'])
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if not user:
+        return redirect(url_for('index'))
+    if current_user == user:
+        flash("你不能取消关注自己")
+        return redirect(url_for('index'))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash("取消关注成功")
+    return redirect(url_for('index'))

@@ -6,6 +6,9 @@
     {{post.author}} says: {{post.content}}
     {% endfor %}
     <p>
+        关注:{{user.followed.count()}}粉丝:{{user.followers.count()}}
+    </p>
+    <p>
         {% if user.about_me %}
         {{ user.about_me}}
         {% endif %}
