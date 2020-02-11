@@ -5,6 +5,7 @@ from app.forms import LoginForm,RegisterForm,EditForm
 from flask_login import current_user,login_user,logout_user,login_required# 登陆框有两种情况 一种是已经登陆了 还有一种是要登陆的
 from app.models import User  # 对登陆的用户进行一个数据库检索和校验
 from datetime import datetime
+
 @app.route('/')
 @app.route('/index')
 @login_required

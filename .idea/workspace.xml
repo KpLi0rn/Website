@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7d1ebd56-9e7d-40e7-a70d-2290950f1179" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/migrations/versions/61ab8c777bfe_followers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/website.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/website.log" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,6 +51,28 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="Unittests for tests.UserModelTest.test_follow_posts" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="website" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.UserModelTest.test_follow_posts&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python tests.Unittests for tests.UserModelTest.test_follow_posts" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -68,7 +95,9 @@
       <workItem from="1580950047435" duration="173000" />
       <workItem from="1580950260902" duration="276000" />
       <workItem from="1580951199982" duration="212000" />
-      <workItem from="1580954849157" duration="4615000" />
+      <workItem from="1580954849157" duration="4819000" />
+      <workItem from="1581306315269" duration="3707000" />
+      <workItem from="1581388941375" duration="10970000" />
     </task>
     <servers />
   </component>
@@ -90,5 +119,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/website$Unittests_for_tests_UserModelTest_test_follow_posts.coverage" NAME="Unittests for tests.UserModelTest.test_follow_posts Coverage Results" MODIFIED="1581410596501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
