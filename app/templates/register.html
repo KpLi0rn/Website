@@ -1,36 +1,12 @@
 {% extends "base.html" %}
-{% block content %}
-    <form action="" method="post">
-        {{register.hidden_tag() }}
-        <p>
-        {{register.username.label}}
-        <br>{{register.username(size=20)}}<br>
-        {% for error in register.username.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-        </p>
-        <p>
-            {{register.email.label}}
-        <br>{{register.email(size=20)}}<br>
-            {% for error in register.email.errors %}
-            <span style="color: #9C1A1C">{{error}}</span>
-            {% endfor %}
-        </p>
-        <p>
-        {{register.password.label}} <br>
-            {{register.password(size=20)}}<br>
-            {% for error in register.password.errors %}
-            <span style="color: #9C1A1C">{{error}}</span>
-            {% endfor %}
-        </p>
-        <p>
-        {{register.password_repeat.label}} <br>
-            {{register.password_repeat(size=20)}}<br>
-            {% for error in register.password_repeat.errors %}
-            <span style="color: #9C1A1C">{{error}}</span>
-            {% endfor %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-        </p>
-        {{register.submit()}}
-    </form>
+{% block app_content %}
+    <h1>Register</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(register)}}
+        </div>
+    </div>
+
 {% endblock %}

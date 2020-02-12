@@ -1,13 +1,14 @@
-<html>
-     <head>
-      <meta charset="UTF-8">
-         <h1>Welcome</h1>
-         {% if title %}
-            <title>{{ title }} - Website</title>
-         {% else %}
-            <title>Welcome to Website</title>
-         {% endif %}
+{% extends 'bootstrap/base.html' %}
+{% block title %}
+     {% if title %}
+        <title>{{ title }} - Website</title>
+     {% else %}
+        <title>Welcome to Website</title>
+     {% endif %}
+{% endblock %}
 
+{% block content %}
+    <div class="container">
          {% if current_user.is_anonymous %}
          <a href="{{url_for('register')}}">Register</a>
          <a href="{{url_for('login')}}">Login</a>
@@ -17,9 +18,7 @@
 <!--         对于有参数的就这样调用-->
          <a href="{{url_for('logout')}}">Logout</a>
          {% endif %}
-    </head>
-    <body>
-        <hr>
+
         {% with messages=get_flashed_messages() %}
             {% if messages %}
                  {% for message in messages %}
@@ -28,6 +27,6 @@
             {% endif %}
         {% endwith %}
         <hr>
-        {% block content %} {% endblock %}
-    </body>
-</html>
+        {% block app_content %} {% endblock %}
+    </div>
+{% endblock %}

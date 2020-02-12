@@ -1,7 +1,5 @@
-<html>
+{% extends "base.html" %}
+{% block app_content %}
+    <h1>File Not Found!</h1>
     <a href="{{url_for('index')}}">Index</a>
-    <title>Not Found!</title>
-    <body>
-        <h1>404 Not Found</h1>
-    </body>
-</html>
+{% endblock %}

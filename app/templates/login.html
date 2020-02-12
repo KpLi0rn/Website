@@ -1,18 +1,12 @@
 {% extends "base.html" %}
-
-{% block content %}
-    <form action="" method="post">
-        {{ loginform.hidden_tag()}}
-        {{ loginform.username.label}} {{loginform.username(size=20)}}<br>
-        {% for error in loginform.username.errors %}
-        <span style="color: #9C1A1C">{{error}}</span>
-        {% endfor %}
-<!--        label 这个标签其实就是显示名字 这个标签的名字 然后() 就是相当于使用这个功能-->
-        {{loginform.password.label}} {{loginform.password(size=20)}} <br>
-        {% for error in loginform.password.errors %}
-        <span style="color: #9C1A1C">{{error}}</span>
-        {% endfor %}
-        {{loginform.remember_me()}}{{loginform.remember_me.label}}
-        {{loginform.submit()}}
-    </form>
+{% import "bootstrap/wtf.html" as wtf %}
+{% block app_content %}
+    <h1>Login</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {{wtf.quick_form(loginform)}}
+        </div>
+    </div>
+    <br>
+    <a href="{{url_for('register')}}">New User? Click here to Register</a>
 {% endblock %}

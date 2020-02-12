@@ -44,8 +44,8 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
     # select fan_id from user where follow_id = 1（用sql语句比较直白) 然后返回的结果是 [2,4]
     # 返回当前用户关注的所有的人的列表
     followed = db.relationship('User',secondary=followers,
-                               primaryjoin=(followers.c.follow_id == id),
-                               secondaryjoin=(followers.c.fan_id == id),
+                               primaryjoin=(followers.c.follower_id == id),
+                               secondaryjoin=(followers.c.followed_id == id),
                                backref=db.backref('followers',lazy='dynamic'),lazy='dynamic')  # 返回的类型是一个列表 对followers表进行了一个关联  返回对数据是列表
 
     def __repr__(self):
@@ -77,8 +77,6 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
         followed = Post.query.join(followers,(Post.user_id == followers.c.followed_id)).filter(followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)   # user_id是post的外键 我们要保证我们可以看到自己的动态
         return followed.union(own).order_by(Post.timestamp.desc())
-
-
 
 class Post(db.Model):
     id = db.Column(db.Integer,primary_key=True)
