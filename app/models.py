@@ -24,13 +24,14 @@ followers = db.Table('followers',
                      db.Column('follower_id',db.Integer,db.ForeignKey('user.id')),
                      db.Column('followed_id',db.Integer,db.ForeignKey('user.id')))
 # 我们这张followers的中间表就是为了 follower_id 就是当前用户的id
-""" follower_id followed_id
-        1           2       一号关注了二号      所以二号有一个粉丝 4号有两个粉丝 1号有一个粉丝
-        1           4       一号关注了四号
+""" follower_id  followed_id(表示关注的人)   这里我们只有一种关系 那就是关注 
+        1           2       一号关注了二号      这里需要这样进行理解 followed_id 被几个人关注  follower_id关注了几个人 
+        1           4       一号关注了四号      所以右边就相当于粉丝 左边就相当于关注
         2           1       二号关注了一号
         3           4       三号关注了四号
 """
 # id username password email
+# 这里 follow需要这样来进行理解
 class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基类  UserMixin 这个是基类包含了四种校验属性
     id = db.Column(db.Integer,primary_key=True)
     username = db.Column(db.String(length=10),index=True,unique=True)
@@ -39,9 +40,12 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
     posts = db.relationship("Post",backref="author",lazy="dynamic")    # backref 有点类似快捷方式 这里是一对多关系 因为一个人可以发多个post 我们在post里面建立一个联系到user
     about_me = db.Column(db.String(150))
     last_seen = db.Column(db.DateTime,default=datetime.utcnow)
+    # 这个是返回一个列表 返回当前用户 比如说 1 所关注的人的名单 可以用sql语句这样表示
+    # select fan_id from user where follow_id = 1（用sql语句比较直白) 然后返回的结果是 [2,4]
+    # 返回当前用户关注的所有的人的列表
     followed = db.relationship('User',secondary=followers,
-                               primaryjoin=(followers.c.follower_id == id),
-                               secondaryjoin=(followers.c.followed_id == id),
+                               primaryjoin=(followers.c.follow_id == id),
+                               secondaryjoin=(followers.c.fan_id == id),
                                backref=db.backref('followers',lazy='dynamic'),lazy='dynamic')  # 返回的类型是一个列表 对followers表进行了一个关联  返回对数据是列表
 
     def __repr__(self):
@@ -53,8 +57,9 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
     def check_password(self,password):
         return check_password_hash(self.password_hash,password)
 
-    def is_following(self,user):    # follower是数据表
-        return self.followed.filter(followers.c.followed_id == user.id).count() > 0  # 对关联表进行一个过滤返回符合结果
+    def is_following(self,user):    # follower是数据表 举个例子这里就是 我有没有关注4 那么就去看fan_id 里面有没有4
+        return self.followed.filter(followers.c.followed_id == user.id).count() > 0  # 对关联表进行一个过滤返回符合结果 这里的user_id 相当于4
+        # 前面的 self.followed 这个很关键 这个是返回我这个用户所关注的所有的人 然后我们再用过滤器过滤我关注的人里面有没有 4
 
     def follow(self,user):
         if not self.is_following(user):
@@ -64,9 +69,12 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
         if self.is_following(user):
             self.followed.remove(user)
 
-    def followed_posts(self):    # 制作一张临时表 关注的人和关注的人的动态 但是这样就是所有人的关注人的动态了 所以我们需要进行一个过滤就是只看自己的关注的人的动态 follers.c.followed_id = self.id
-        # 但是这样就不能看到我们自己的动态了
-        followed = Post.query.join(followers,(followers.c.followed_id == Post.user_id)).filter(followers.c.follower_id == self.id)  # 第二个是follower_id
+    def followed_posts(self):
+        # 关注的人的动态 + 自己的动态                 关注的人的动态                                加了一个限定 我关注的人的动态
+        # 一定要加限定 因为之前返回的是 a关注的人 和 b关注的人的合集 后面的过滤就是加一个限定 比如我是a用户 那么就返回 a关注的人的动态
+        # 不加限定的sql语句就像这样  select followed_id from user
+        # 加了限定的sql语句是这样    select followed_id from user where follower_id = "a"
+        followed = Post.query.join(followers,(Post.user_id == followers.c.followed_id)).filter(followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)   # user_id是post的外键 我们要保证我们可以看到自己的动态
         return followed.union(own).order_by(Post.timestamp.desc())
 
