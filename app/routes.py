@@ -1,24 +1,30 @@
 from app import app,db
 from flask import render_template,redirect,flash,url_for,request
 from werkzeug.urls import url_parse      # url 解析
-from app.forms import LoginForm,RegisterForm,EditForm
+from app.forms import LoginForm,RegisterForm,EditForm,PostForm
 from flask_login import current_user,login_user,logout_user,login_required# 登陆框有两种情况 一种是已经登陆了 还有一种是要登陆的
-from app.models import User  # 对登陆的用户进行一个数据库检索和校验
+from app.models import User,Post  # 对登陆的用户进行一个数据库检索和校验
 from datetime import datetime
 
-@app.route('/')
-@app.route('/index')
+@app.route('/',methods=["GET","POST"])
+@app.route('/index',methods=["GET","POST"])
 @login_required
 def index():
-    posts = [{
-        "author":"KpLi0rn",
-        "content":"be happy"
-    },
-    {
-        "author":"kplern",
-        "content":"have a good day"
-    }]
-    return render_template("index.html",posts=posts,title="Welcome")
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(content=form.post.data,author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash("发布成功")
+        return redirect(url_for('index'))
+    # posts = current_user.followed_posts().all()
+    page = request.args.get('page',1,type=int)
+    posts = current_user.followed_posts().paginate(page,app.config['POST_PRE_PAGE'],False)   # paginate 是控制page的范围
+    next_url = url_for('index',page=posts.next_num) \
+        if posts.has_next else None
+    prev_url = url_for('index',page=posts.prev_num) \
+        if posts.prev_num else None
+    return render_template("index.html",posts=posts.items,title="Welcome",form=form,next_url=next_url,prev_url=prev_url)
 
 @app.route('/login',methods=['GET','POST'])
 def login():
@@ -128,3 +134,14 @@ def unfollow(username):
     db.session.commit()
     flash("取消关注成功")
     return redirect(url_for('index'))
+
+@app.route('/explore')
+@login_required
+def explore():
+    page = request.args.get('page',1,type=int)   # 首先获取 page的参数
+    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page,app.config['POST_PRE_PAGE'],False)
+    next_url = url_for('explore',page=posts.next_num) \
+        if posts.next_num else None
+    prev_url = url_for('explore',page=posts.prev_num) \
+        if posts.prev_num else None
+    return render_template('index.html',posts=posts.items,title="Explore",next_url=next_url,prev_url=prev_url)   # 返回的是一个实例 通过items方法获取列表

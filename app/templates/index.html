@@ -2,7 +2,18 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block app_content %}
     <h1>Hi! {{current_user.username}}</h1>
+<!--只有在传入表单数据的时候才会进行显示-->
+    {% if form %}
+    {{ wtf.quick_form(form)}}
+    <br>
+    {% endif %}
     {% for post in posts %}
-    <div>{{post.author}} Says {{post.content}}</div>
+        {% include "_post.html" %}
     {% endfor %}
+    {% if prev_url %}
+    <a href="{{prev_url}}">Previous</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{next_url}}">Next</a>
+    {% endif %}
 {% endblock %}

@@ -1,0 +1,13 @@
+<table class="table table-hover">
+    <tr>
+        <td>
+            <a href="{{url_for('user',username=post.author.username)}}"></a>
+        </td>
+        <td>
+            <a href="{{url_for('user',username=post.author.username)}}">{{post.author.username}}</a>
+            says:
+            <br>
+            {{post.content}}
+        </td>
+    </tr>
+</table>

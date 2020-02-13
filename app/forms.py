@@ -48,5 +48,9 @@ class EditForm(FlaskForm):   # 这个form 的类也是继承与 flaskform的
             if user is not None:
                 raise ValidationError("当前用户名已存在")
 
+class PostForm(FlaskForm):
+    post = TextAreaField("说些什么吧!",validators=[DataRequired(),length(1,150)])
+    submit = SubmitField("提交")
+
 
 
