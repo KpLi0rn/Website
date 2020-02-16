@@ -52,5 +52,11 @@ class PostForm(FlaskForm):
     post = TextAreaField("说些什么吧!",validators=[DataRequired(),length(1,150)])
     submit = SubmitField("提交")
 
+class ResetForm(FlaskForm):
+    email = StringField("邮箱",validators=[DataRequired()])
+    submit = SubmitField("提交")
 
-
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField("新密码",validators=[DataRequired()])
+    check_password = PasswordField("确认密码",validators=[DataRequired(),EqualTo('password')])
+    submit = SubmitField("提交")

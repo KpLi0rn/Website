@@ -1,2 +1,2 @@
 FLASK_APP=website.py
-FLASK_DEBUG=1
+

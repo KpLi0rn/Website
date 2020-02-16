@@ -1,7 +1,8 @@
 from app import app,db
 from flask import render_template,redirect,flash,url_for,request
 from werkzeug.urls import url_parse      # url 解析
-from app.forms import LoginForm,RegisterForm,EditForm,PostForm
+from app.forms import LoginForm,RegisterForm,EditForm,PostForm,ResetForm,ResetPasswordForm
+from app.email import send_reset_pwd_email
 from flask_login import current_user,login_user,logout_user,login_required# 登陆框有两种情况 一种是已经登陆了 还有一种是要登陆的
 from app.models import User,Post  # 对登陆的用户进行一个数据库检索和校验
 from datetime import datetime
@@ -145,3 +146,33 @@ def explore():
     prev_url = url_for('explore',page=posts.prev_num) \
         if posts.prev_num else None
     return render_template('index.html',posts=posts.items,title="Explore",next_url=next_url,prev_url=prev_url)   # 返回的是一个实例 通过items方法获取列表
+
+@app.route('/reset',methods=['GET','POST'])
+def reset():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    form = ResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_reset_pwd_email(user)
+            flash("点击邮箱中的密码重置链接进行密码重置")
+            return redirect(url_for('login'))
+    return render_template("reset.html",form=form,title="ResetPassword")
+
+# 重新设置密码的页面
+@app.route('/reset_password/<token>',methods=['GET','POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    user = User.check_reset_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.add(user)   # 教程有问题
+        db.session.commit()
+        flash("密码修改成功")
+        return redirect(url_for('login'))
+    return render_template("reset_password.html",form=form)
