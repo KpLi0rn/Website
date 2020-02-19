@@ -15,7 +15,7 @@
     </p>
     <p>
         {% if user.last_seen %}
-        {{ user.last_seen }}
+        <p>Last Seen on:{{ moment(user.last_seen).format('LLL')}}
         {% endif %}
     </p>
     <p>

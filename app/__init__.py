@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from logging.handlers import RotatingFileHandler
 from flask_bootstrap import Bootstrap
 from flask_mail import Mail,Message
+from flask_moment import Moment
 import logging
 import os
 
@@ -14,8 +15,9 @@ bootstrap = Bootstrap(app)
 app.config.from_object(Config) # 将配置对象的配置信息转化成app.config的配置
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
-mail = Mail(app)   # mail 写到config前面了
+mail = Mail(app)   # mail 写到config前面了 所以发不出去邮件
 login = LoginManager(app)
+moment = Moment(app)
 login.login_view = 'login'  # 进行强制跳转的页面
 
 from app import routes,models,errors # 需要导入models 不然就无法进行迁移了
