@@ -10,14 +10,14 @@
 {% block content %}
     <div class="container">
          {% if current_user.is_anonymous %}
-         <a href="{{url_for('register')}}">Register</a>
-         <a href="{{url_for('login')}}">Login</a>
+         <a href="{{url_for('auth.register')}}">Register</a>
+         <a href="{{url_for('auth.login')}}">Login</a>
          {% else %}
-         <a href="{{url_for('index')}}">Home</a>
-         <a href="{{url_for('explore')}}">Explore</a>
-         <a href="{{url_for('user',username=current_user.username)}}">Profile</a>
+         <a href="{{url_for('main.index')}}">Home</a>
+         <a href="{{url_for('main.explore')}}">Explore</a>
+         <a href="{{url_for('main.user',username=current_user.username)}}">Profile</a>
 <!--         对于有参数的就这样调用-->
-         <a href="{{url_for('logout')}}">Logout</a>
+         <a href="{{url_for('auth.logout')}}">Logout</a>
          {% endif %}
 
         {% with messages=get_flashed_messages() %}

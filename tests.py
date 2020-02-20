@@ -1,11 +1,12 @@
 from datetime import datetime,timedelta
 import unittest
 from app.models import User,Post
-from app import app,db
+from app import db
+from flask import current_app
 
 class UserModelTest(unittest.TestCase):
     def setUp(self):
-        app.config['SQKALCHEMY_DATABASE_URL']="sqlite://"
+        current_app.config['SQKALCHEMY_DATABASE_URL']="sqlite://"
         db.create_all()
     # 删除
     def tearDown(self):

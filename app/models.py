@@ -6,7 +6,8 @@ from flask_login import UserMixin
 from app import login
 from time import time
 import jwt
-from app import app  #我们要获取secret_key
+from flask import current_app
+# from app import app  #我们要获取secret_key
 
 # 进行用户登陆的功能编写的时候 需要用到 flask-login 的 loginManager 并且在 文件中进行注册 给app添加用户登陆的属性 / 对象
 # 将注册后的登陆对象 导入到 models 由于要对密码进行加密 所以先书写 哈希加密 和 哈希密码的校验
@@ -82,12 +83,12 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
         return followed.union(own).order_by(Post.timestamp.desc())
 
     def create_resetpwd_token(self,expires=600):
-        return jwt.encode({"reset_password":self.id,"exp":time()+expires},app.config['SECRET_KEY'],algorithm='HS256').decode('utf-8')
+        return jwt.encode({"reset_password":self.id,"exp":time()+expires},current_app.config['SECRET_KEY'],algorithm='HS256').decode('utf-8')
 
     @staticmethod
     def check_reset_token(token):
         try:
-            id = jwt.decode(token,app.config['SECRET_KEY'],algorithm=['HS256'])['reset_password']
+            id = jwt.decode(token,current_app.config['SECRET_KEY'],algorithm=['HS256'])['reset_password']
         except:
             return None
         return User.query.get(id)
