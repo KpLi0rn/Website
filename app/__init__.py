@@ -41,17 +41,17 @@ def create_app(config_class=Config):
 
     # 如果不是debug模式的话 就进行日志的记录
     # 大致的逻辑是这样的生成一个log文件 然后进行 形式化
-    # if not app.debug:
-    #     # 如果没有日志文件夹那么就创建一个
-    #     if not os.path.exists('logs'):
-    #         os.mkdir('logs')
-    #     file_handler = RotatingFileHandler('logs/website.log',maxBytes=10240,backupCount=10)
-    #     # 时间 等级名字 错误信息 错误路径 行数
-    #     file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s in [%(filename)s %(lineno)s]'))
-    #     file_handler.setLevel(logging.INFO)
-    #     app.logger.addHandler(file_handler)  # 这里的方法是 Handler
-    #     app.logger.setLevel(logging.INFO)
-    #     app.logger.info("Website Starts up")
+    if not app.debug:
+        # 如果没有日志文件夹那么就创建一个
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        file_handler = RotatingFileHandler('logs/website.log',maxBytes=10240,backupCount=10)
+        # 时间 等级名字 错误信息 错误路径 行数
+        file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s in [%(filename)s %(lineno)s]'))
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)  # 这里的方法是 Handler
+        app.logger.setLevel(logging.INFO)
+        app.logger.info("Website Starts up")
 
     return app
 
