@@ -94,6 +94,7 @@ class User(UserMixin,db.Model):   # User 继承 db.Model 是所有类型的基�
         return User.query.get(id)
 
 class Post(db.Model):
+    __searchable__= ['body']
     id = db.Column(db.Integer,primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))  # 这里对应的是相关联的表 user的id 和user——id 进行绑定 所以是 user.id
     timestamp = db.Column(db.DateTime,default=datetime.utcnow(),index=True)
